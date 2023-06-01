@@ -1,8 +1,8 @@
 
 import Notiflix from 'notiflix';
 import SlimSelect from 'slim-select';
-// import './sass/style.scss';
-// import fetchBreeds from './cat-api';
+import './sass/style.scss';
+import fetchBreeds from './cat-api';
 
 
 const BASE_URL = `https://api.thecatapi.com/v1/breeds`;
@@ -14,23 +14,9 @@ let numberBreeds = [];
 searchForm.addEventListener('input', onSearch);
 
 
-function fetchBreeds() {
-  fetch(BASE_URL,{headers: {
-      'x-api-key': API_KEY
-    }})
-    .then((response) => {
-      console.log(response);
-      if (!response.ok) {
-        throw new Error (response.statusText)
-      }
-      
-      return response.json();
-     
-    })
-};
-   
+
    fetchBreeds().then((data) => {
-      console.log(data)
+      // console.log(data)
       loader.textContent = '';
       numberBreeds = data;
       // console.log(numberBreeds);
@@ -45,35 +31,9 @@ function fetchBreeds() {
       }
     })
   .catch(function(error) {
-    console.log(error);
+    // console.log(error);
     Notiflix.Notify.warning('Oops! Something went wrong! Try reloading the page!');
   });
-
-
-
-  
-  
-
-// fetchBreeds();
-
-// fetchBreeds().then((data) => {
-//   loader.textContent = '';
-//   numberBreeds = data;
-//   for (let i = 0; i < numberBreeds.length; i += 1) {
-//     const breed = numberBreeds[i];
-//     let option = document.createElement('option');
-//     if (!breed.image) continue
-//     option.value = i;
-//     option.innerHTML = `${breed.name}`;
-//     searchForm.appendChild(option);
-//   }
-// })
-//   .catch(function (error) {
-//     console.log(error);
-//     // Notiflix.Notify.warning('Oops! Something went wrong! Try reloading the page!');
-//   });
-
-
 
 
 
@@ -86,7 +46,7 @@ function onSearch(evt) {
 
 function fetchCatByBreed(breedId) {
   loader.textContent = 'Loading data, please wait...';
-  console.log(breedId);
+  // console.log(breedId);
   fetch(BASE_URL, {
     headers: {
     'x-api-key': API_KEY,
