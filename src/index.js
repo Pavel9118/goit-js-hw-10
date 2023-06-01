@@ -27,8 +27,9 @@ function fetchBreeds() {
       return response.json();
      
     })
-
-   .then((data) => {
+};
+   
+   fetchBreeds().then((data) => {
       console.log(data)
       loader.textContent = '';
       numberBreeds = data;
@@ -48,12 +49,12 @@ function fetchBreeds() {
     Notiflix.Notify.warning('Oops! Something went wrong! Try reloading the page!');
   });
 
-};
+
 
   
   
 
-fetchBreeds();
+// fetchBreeds();
 
 // fetchBreeds().then((data) => {
 //   loader.textContent = '';
