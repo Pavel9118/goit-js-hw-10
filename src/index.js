@@ -31,8 +31,10 @@ searchForm.addEventListener('input', onSearch);
       }
     })
   .catch(function(error) {
-    // console.log(error);
+    console.log(error);
     Notiflix.Notify.warning('Oops! Something went wrong! Try reloading the page!');
+    clearHTML();
+    return
   });
 
 
@@ -54,7 +56,6 @@ function fetchCatByBreed(breedId) {
   }
   })
     .then((response) => {
-      console.log('111');
       if (!response.ok) {
         throw new Error (response.statusText)
       }
@@ -75,6 +76,12 @@ function fetchCatByBreed(breedId) {
       
   })
   .catch(function(error) {
-   console.log(error);
+    console.log(error);
+    clearHTML();
+    return
   })
 };
+
+function clearHTML() {
+  showInfo.innerHTML = "";
+}
