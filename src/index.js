@@ -23,7 +23,8 @@ searchForm.addEventListener('input', onSearch);
       for (let i = 0; i < numberBreeds.length; i += 1) {
         const breed = numberBreeds[i];
         let option = document.createElement('option');
-        if(!breed.image)continue
+        // if(!breed.image)continue
+     
         option.value = i;
         option.innerHTML = `${breed.name}`;
         searchForm.appendChild(option);
@@ -45,10 +46,8 @@ function onSearch(evt) {
 
 };
 
-
 function fetchCatByBreed(breedId) {
   loader.textContent = 'Loading data, please wait...';
-  // console.log(breedId);
   fetch(BASE_URL, {
     headers: {
     'x-api-key': API_KEY,
@@ -65,6 +64,11 @@ function fetchCatByBreed(breedId) {
     .then((data) => {
       loader.textContent = '';
       numberBreeds = data;
+      // console.log(numberBreeds[breedId].image);
+      if (!numberBreeds[breedId].image) {
+        Notiflix.Notify.warning('Oops! Something went wrong! Try reloading the page!');
+        throw new Error(data.statusText);
+      }
       const catCard = `<img src="${numberBreeds[breedId].image.url}" width="500 px" alt="11111"><h2>${numberBreeds[breedId].name}</h2><p>${numberBreeds[breedId].description}</p>`;
       
       showInfo.innerHTML = catCard;
